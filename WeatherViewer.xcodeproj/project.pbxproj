@@ -29,6 +29,7 @@
 		59B394E42714C84F0075546D /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B394E32714C84F0075546D /* SearchViewController.swift */; };
 		59B394EA2714D2150075546D /* SearchHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B394E92714D2150075546D /* SearchHistoryTableViewCell.swift */; };
 		59B394EC2714D5C20075546D /* SearchHistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 59B394EB2714D5C20075546D /* SearchHistoryTableViewCell.xib */; };
+		59B394EF2714F2200075546D /* Keywords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B394EE2714F2200075546D /* Keywords.swift */; };
 		FAC7103CEAB8929FA8254CA6 /* libPods-WeatherViewer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D5FBAAE0702734E7692C2E22 /* libPods-WeatherViewer.a */; };
 /* End PBXBuildFile section */
 
@@ -78,6 +79,7 @@
 		59B394E32714C84F0075546D /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		59B394E92714D2150075546D /* SearchHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryTableViewCell.swift; sourceTree = "<group>"; };
 		59B394EB2714D5C20075546D /* SearchHistoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchHistoryTableViewCell.xib; sourceTree = "<group>"; };
+		59B394EE2714F2200075546D /* Keywords.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keywords.swift; sourceTree = "<group>"; };
 		759023589D7BCD5AF5939A56 /* Pods-WeatherViewer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherViewer.debug.xcconfig"; path = "Target Support Files/Pods-WeatherViewer/Pods-WeatherViewer.debug.xcconfig"; sourceTree = "<group>"; };
 		7AC283084295D4D494AD3714 /* libPods-WeatherViewerTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WeatherViewerTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AD5258309BB6FE3573AC0BF /* Pods-WeatherViewerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherViewerTests.debug.xcconfig"; path = "Target Support Files/Pods-WeatherViewerTests/Pods-WeatherViewerTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 		59B3948C271467810075546D /* WeatherViewer */ = {
 			isa = PBXGroup;
 			children = (
+				59B394ED2714F2090075546D /* Models */,
 				59B394D82714A6CF0075546D /* Configuration */,
 				59B394C0271470440075546D /* Extensions */,
 				59B394BF2714701B0075546D /* App Flow */,
@@ -259,6 +262,14 @@
 				59B394EB2714D5C20075546D /* SearchHistoryTableViewCell.xib */,
 			);
 			path = TableViewCells;
+			sourceTree = "<group>";
+		};
+		59B394ED2714F2090075546D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				59B394EE2714F2200075546D /* Keywords.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		BB66C07F28D977553F24C9E7 /* Pods */ = {
@@ -491,6 +502,7 @@
 				59B394D027149B9B0075546D /* CurrentConditionsResponseObject.swift in Sources */,
 				59B394E22714C63E0075546D /* LocationDataHandler.swift in Sources */,
 				59B394E02714BB3C0075546D /* MainViewController.swift in Sources */,
+				59B394EF2714F2200075546D /* Keywords.swift in Sources */,
 				59B394EA2714D2150075546D /* SearchHistoryTableViewCell.swift in Sources */,
 				59B394D227149D710075546D /* WeatherAPICalls.swift in Sources */,
 				59B394C6271481300075546D /* WeatherAppAPI.swift in Sources */,

@@ -78,7 +78,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="esb-cu-a2a" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="0ni-du-16h"/>
-                            <constraint firstItem="esb-cu-a2a" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" constant="-44" id="OPH-ry-RiE"/>
+                            <constraint firstItem="esb-cu-a2a" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="firstBaseline" id="OPH-ry-RiE"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="dYP-R8-Nzg" secondAttribute="bottom" id="V9Q-zJ-DGg"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="esb-cu-a2a" secondAttribute="trailing" id="anE-8h-vvc"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="dYP-R8-Nzg" secondAttribute="trailing" id="bSa-Ny-C4Y"/>
@@ -115,6 +115,7 @@
                                         <textInputTraits key="textInputTraits"/>
                                         <connections>
                                             <action selector="SearchFieldPressed:" destination="BYZ-38-t0r" eventType="editingDidBegin" id="t08-fY-Rqx"/>
+                                            <outlet property="delegate" destination="Xvy-jp-hjO" id="LKU-aJ-Yzt"/>
                                         </connections>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LL4-h3-l6x" userLabel="SearchButton">
@@ -237,6 +238,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="cnstHistoryTableViewHeight" destination="l3Q-Kp-BNR" id="sPh-lz-yVE"/>
                         <outlet property="searchHistoryTableView" destination="bJ4-nL-Q0V" id="TkU-Kk-Nmg"/>
                         <outlet property="searchListTableView" destination="74v-a1-mou" id="U6a-34-CmW"/>
                         <outlet property="txtSearchInput" destination="2oz-62-8al" id="B9y-Ho-Dxt"/>
