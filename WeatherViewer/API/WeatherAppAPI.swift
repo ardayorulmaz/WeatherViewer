@@ -45,7 +45,8 @@ class WeatherAppAPI: NSObject {
                 success(value)
             case .failure(let error):
                 
-                let generalError = ErrorResponse(statusCode: response.response?.statusCode, ErrorCode : error.responseCode, ErrorMessage: callPath + ": " + error.localizedDescription)
+                let generalError = ErrorResponse(code: String(response.response?.statusCode ?? 400), message: response.response?.description, reference: callPath)
+                
                 failure(generalError)
             }
             
@@ -75,7 +76,8 @@ class WeatherAppAPI: NSObject {
                 success(value)
             case .failure(let error):
                                 
-                let generalError = ErrorResponse(statusCode: response.response?.statusCode, ErrorCode : error.responseCode, ErrorMessage: callPath + ": " + error.localizedDescription)
+                let generalError = ErrorResponse(code: String(response.response?.statusCode ?? 400), message: response.response?.description, reference: callPath)
+                
                 failure(generalError)
             }
         }
