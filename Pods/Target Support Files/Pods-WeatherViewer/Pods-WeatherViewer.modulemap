@@ -1,0 +1,6 @@
+module Pods_WeatherViewer {
+  umbrella header "Pods-WeatherViewer-umbrella.h"
+
+  export *
+  module * { export * }
+}
