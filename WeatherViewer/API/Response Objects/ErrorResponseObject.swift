@@ -6,13 +6,14 @@
 //
 
 
-//Base error response object for error handling
+//Base error response object for error handling			
 struct ErrorResponse: Error, Codable {
 
-    var statusCode : Int?
-    var ErrorCode : Int?
-    var ErrorMessage: String?
+    var code, message, reference: String?
 
-    
+    enum CodingKeys: String, CodingKey {
+            case code = "Code"
+            case message = "Message"
+            case reference = "Reference"
+        }
 }
-

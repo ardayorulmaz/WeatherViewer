@@ -62,5 +62,9 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>APIKey</key>
+	<string>Xx2eAgoDh1Z0J7wpKNLZXZN44lnLV4mO</string>
+	<key>BaseURL</key>
+	<string>http://dataservice.accuweather.com/</string>
 </dict>
 </plist>
