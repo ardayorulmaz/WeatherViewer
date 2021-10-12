@@ -68,7 +68,57 @@ class WeatherConditionView: UIView, XibInstantiatable {
         }
         
         if let image = data.weatherIcon {
-            self.imgWeatherImage.image = UIImage.init(named: "\(image)-s")
+            var imageString = String(image) + "-s"
+            if image<10{
+                imageString = "0" + imageString
+            }
+            self.imgWeatherImage.image = UIImage.init(named: imageString)
+        }else {
+            self.imgWeatherImage.image = UIImage.init(named: "1-s")
+        }
+        
+    }
+    
+    func setupView(data : CurrentConditionsResponse, locationData : GeolocationSearchResponse){
+        self.lblCityName.text = locationData.localizedName
+        if let temp = data.temperature?.metric?.value, let unit = data.temperature?.metric?.unit {
+            self.lblTemperature.text = String(temp) + " " + unit
+        }
+        else {
+            self.lblTemperature.text = "?"
+        }
+        if let weatherStatus = data.weatherText {
+            self.lblWeatherStatus.text = weatherStatus
+        }else {
+            self.lblTemperature.text = ""
+        }
+        
+        if let localTime = data.localObservationDateTime{
+            let dateFormatterGet = DateFormatter()
+            dateFormatterGet.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+            if let date = dateFormatterGet.date(from: localTime) {
+                
+                let hourFormatter = DateFormatter()
+                hourFormatter.dateFormat = "HH:mm"
+                self.lblLocalTime.text = hourFormatter.string(from: date)
+                
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "dd MM yyyy"
+                self.lblLocalDate.text = dateFormatter.string(from: date)
+            }
+            
+        }
+        else {
+            self.lblLocalDate.text = ""
+            self.lblLocalTime.text = ""
+        }
+        
+        if let image = data.weatherIcon {
+            var imageString = String(image) + "-s"
+            if image<10{
+                imageString = "0" + imageString
+            }
+            self.imgWeatherImage.image = UIImage.init(named: imageString)
         }else {
             self.imgWeatherImage.image = UIImage.init(named: "1-s")
         }

@@ -34,6 +34,6 @@ class WeatherAPICalls: NSObject {
         
         // API Call for geolocation search
         
-        WeatherAppAPI.sharedAPI.get("locations/v1/cities/geoposition/search?apikey="+ConfigurationDataHandler.shared.apiKey()+latLong, parameters: nil, success: success, failure: failure);
+        WeatherAppAPI.sharedAPI.get("locations/v1/cities/geoposition/search?apikey="+ConfigurationDataHandler.shared.apiKey()+"&q="+latLong, parameters: nil, success: success, failure: failure);
     }
 }

@@ -24,9 +24,12 @@ struct Keywords : Codable {
         if !keywords.isEmpty && keywords.count == 5{
             self.keywords.removeLast()
         }
+        if !keywords.contains(text){
+            self.keywords.insert(text, at: 0)
+            let defaults = UserDefaults.standard
+            defaults.set(self.keywords, forKey: "UserSearchHistory")
+        }
         
-        self.keywords.insert(text, at: 0)
-        let defaults = UserDefaults.standard
-        defaults.set(self.keywords, forKey: "UserSearchHistory")
+  
     }
 }

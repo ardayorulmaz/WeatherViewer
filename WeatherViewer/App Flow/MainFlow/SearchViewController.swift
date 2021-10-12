@@ -82,8 +82,10 @@ class SearchViewController : UIViewController {
        
     }
     func removeFromSearchHistory(index : Int){
-        savedHistory.removeAt(index: index)
+        self.savedHistory.removeAt(index: index)
+        
         self.initTableView()
+        self.searchHistoryTableView.reloadData()
     }
     
     func historyCellContent(index : Int)-> String {
@@ -214,7 +216,7 @@ extension SearchViewController : UITableViewDataSource, UITableViewDelegate {
 
 extension SearchViewController : SearchHistoryTableViewCellDelegate {
     func cellDeletePressed(index: Int) {
-     removeFromSearchHistory(index: index)
+        self.removeFromSearchHistory(index: index)
     }
     
     

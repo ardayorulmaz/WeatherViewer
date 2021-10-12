@@ -22,10 +22,7 @@ class SearchDetailViewController: UIViewController {
         self.loadData()
     }
     
-    func showBanner(text : String, type : NotificationBannerSwift.BannerStyle){
-        let notificationBanner = NotificationBanner.init(title: "Hata", subtitle: text, style: type)
-                        notificationBanner.show()
-    }
+  
     func loadData(){
         
         guard let searchData = self.searchData else {

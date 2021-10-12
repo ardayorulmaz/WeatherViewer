@@ -73,15 +73,23 @@
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="4h9-MP-HRs" secondAttribute="trailing" constant="5" id="zRL-9Q-rWT"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y4c-xr-sQ3" customClass="WeatherConditionView" customModule="WeatherViewer" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="234" width="414" height="628"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="esb-cu-a2a" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="0ni-du-16h"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Y4c-xr-sQ3" secondAttribute="bottom" id="408-t2-FK2"/>
                             <constraint firstItem="esb-cu-a2a" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="firstBaseline" id="OPH-ry-RiE"/>
+                            <constraint firstItem="Y4c-xr-sQ3" firstAttribute="leading" secondItem="esb-cu-a2a" secondAttribute="leading" id="PQC-Pj-QIm"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="dYP-R8-Nzg" secondAttribute="bottom" id="V9Q-zJ-DGg"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="esb-cu-a2a" secondAttribute="trailing" id="anE-8h-vvc"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="dYP-R8-Nzg" secondAttribute="trailing" id="bSa-Ny-C4Y"/>
+                            <constraint firstItem="Y4c-xr-sQ3" firstAttribute="top" secondItem="esb-cu-a2a" secondAttribute="bottom" id="l3i-td-Z4K"/>
+                            <constraint firstItem="Y4c-xr-sQ3" firstAttribute="trailing" secondItem="esb-cu-a2a" secondAttribute="trailing" id="uWX-Bx-y1T"/>
                             <constraint firstItem="dYP-R8-Nzg" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="y3e-GV-T2a"/>
                             <constraint firstItem="dYP-R8-Nzg" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="zMf-16-oG3"/>
                         </constraints>
@@ -89,6 +97,7 @@
                     <connections>
                         <outlet property="btnSearch" destination="T94-KW-cql" id="bCi-sr-uWC"/>
                         <outlet property="txtSearchField" destination="bvZ-Cb-wal" id="EeW-K0-VBY"/>
+                        <outlet property="vwWeatherConditionView" destination="Y4c-xr-sQ3" id="yDa-Ir-QQo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

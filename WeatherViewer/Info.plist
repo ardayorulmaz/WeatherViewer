@@ -74,5 +74,7 @@
 			<true/>
 		</dict>
 	</dict>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>WeatherApp yakınlarınızdaki hava durumunu göstermek amacıyla lokasyonunuza erişim izni istiyor.</string>
 </dict>
 </plist>
