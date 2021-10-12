@@ -26,6 +26,11 @@ class SearchHistoryTableViewCell : UITableViewCell  {
     weak var delegate : SearchHistoryTableViewCellDelegate?
     var cellIndex : Int? = nil
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
+    }
+    
     func setupCell(text : String, index : Int){
         self.lblText.text = text
         self.cellIndex = index

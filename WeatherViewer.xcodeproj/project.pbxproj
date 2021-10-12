@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		06B3512C01682CA1309D4546 /* libPods-WeatherViewerTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AC283084295D4D494AD3714 /* libPods-WeatherViewerTests.a */; };
 		3C40E999E3EC875F671A151A /* libPods-WeatherViewer-WeatherViewerUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F27658DDC5A43896ED88A0F3 /* libPods-WeatherViewer-WeatherViewerUITests.a */; };
+		591E5C95271556C1007401AC /* SearchResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591E5C93271556C1007401AC /* SearchResultTableViewCell.swift */; };
+		591E5C96271556C1007401AC /* SearchResultTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 591E5C94271556C1007401AC /* SearchResultTableViewCell.xib */; };
+		591E5C98271564D7007401AC /* Configuration.plist in Resources */ = {isa = PBXBuildFile; fileRef = 591E5C97271564D7007401AC /* Configuration.plist */; };
 		59B3948E271467810075546D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B3948D271467810075546D /* AppDelegate.swift */; };
 		59B39490271467810075546D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B3948F271467810075546D /* SceneDelegate.swift */; };
 		59B39495271467810075546D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 59B39493271467810075546D /* Main.storyboard */; };
@@ -53,6 +56,9 @@
 /* Begin PBXFileReference section */
 		275279B78771274F4C3B6B80 /* Pods-WeatherViewer-WeatherViewerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherViewer-WeatherViewerUITests.release.xcconfig"; path = "Target Support Files/Pods-WeatherViewer-WeatherViewerUITests/Pods-WeatherViewer-WeatherViewerUITests.release.xcconfig"; sourceTree = "<group>"; };
 		3C6F8ADEA0B5C9F0FA70BDDA /* Pods-WeatherViewer-WeatherViewerUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherViewer-WeatherViewerUITests.debug.xcconfig"; path = "Target Support Files/Pods-WeatherViewer-WeatherViewerUITests/Pods-WeatherViewer-WeatherViewerUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		591E5C93271556C1007401AC /* SearchResultTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultTableViewCell.swift; sourceTree = "<group>"; };
+		591E5C94271556C1007401AC /* SearchResultTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchResultTableViewCell.xib; sourceTree = "<group>"; };
+		591E5C97271564D7007401AC /* Configuration.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Configuration.plist; sourceTree = "<group>"; };
 		59B3948A271467810075546D /* WeatherViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		59B3948D271467810075546D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		59B3948F271467810075546D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -241,6 +247,7 @@
 		59B394D82714A6CF0075546D /* Configuration */ = {
 			isa = PBXGroup;
 			children = (
+				591E5C97271564D7007401AC /* Configuration.plist */,
 			);
 			path = Configuration;
 			sourceTree = "<group>";
@@ -260,6 +267,8 @@
 			children = (
 				59B394E92714D2150075546D /* SearchHistoryTableViewCell.swift */,
 				59B394EB2714D5C20075546D /* SearchHistoryTableViewCell.xib */,
+				591E5C93271556C1007401AC /* SearchResultTableViewCell.swift */,
+				591E5C94271556C1007401AC /* SearchResultTableViewCell.xib */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -402,7 +411,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				59B3949A271467820075546D /* LaunchScreen.storyboard in Resources */,
+				591E5C96271556C1007401AC /* SearchResultTableViewCell.xib in Resources */,
 				59B39497271467820075546D /* Assets.xcassets in Resources */,
+				591E5C98271564D7007401AC /* Configuration.plist in Resources */,
 				59B394EC2714D5C20075546D /* SearchHistoryTableViewCell.xib in Resources */,
 				59B39495271467810075546D /* Main.storyboard in Resources */,
 			);
@@ -500,6 +511,7 @@
 			files = (
 				59B394CE271496170075546D /* GeolocationSearchResponseObject.swift in Sources */,
 				59B394D027149B9B0075546D /* CurrentConditionsResponseObject.swift in Sources */,
+				591E5C95271556C1007401AC /* SearchResultTableViewCell.swift in Sources */,
 				59B394E22714C63E0075546D /* LocationDataHandler.swift in Sources */,
 				59B394E02714BB3C0075546D /* MainViewController.swift in Sources */,
 				59B394EF2714F2200075546D /* Keywords.swift in Sources */,

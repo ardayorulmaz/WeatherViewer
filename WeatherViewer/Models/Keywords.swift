@@ -2,7 +2,7 @@
 //  KeywordSearchHistory.swift
 //  WeatherViewer
 //
-//  Created by 23 Studios on 12.10.2021.
+//  Created by Arda Yorulmaz on 12.10.2021.
 //
 
 import Foundation
@@ -20,7 +20,11 @@ struct Keywords : Codable {
     }
     
     mutating func add(text : String){
-        self.keywords.removeLast()
+        //To remove last element if keyword list has 5 elements.
+        if !keywords.isEmpty && keywords.count == 5{
+            self.keywords.removeLast()
+        }
+        
         self.keywords.insert(text, at: 0)
         let defaults = UserDefaults.standard
         defaults.set(self.keywords, forKey: "UserSearchHistory")

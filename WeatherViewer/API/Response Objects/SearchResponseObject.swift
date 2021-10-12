@@ -11,7 +11,7 @@ struct SearchResponseObject: Codable {
     var version: Int?
     var key, type: String?
     var rank: Int?
-    var localizedName: String?
+    var localizedName: String
     var country, administrativeArea: AdministrativeArea?
 
     enum CodingKeys: String, CodingKey {

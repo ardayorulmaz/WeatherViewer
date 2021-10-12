@@ -23,6 +23,8 @@ class SearchViewController : UIViewController {
     //Struct for saving keywords
     var savedHistory : Keywords = Keywords()
     
+    var searchResults : AutoSearchResponse = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         loadData()
@@ -38,48 +40,72 @@ class SearchViewController : UIViewController {
         //reconfiguring tableviews
         initTableView()
     }
-    func saveSearchHistory(text : String){
-       
-        savedHistory.add(text: text)
-        initTableView()
-       
-    }
-    func removeFromSearchHistory(index : Int){
-        savedHistory.removeAt(index: index)
-        initTableView()
-    }
+  
     //Setting up tableviews, assigning reusable TVC`s and various settings.
     func initTableView() {
             
         self.searchHistoryTableView.dataSource = self
-            
+        self.searchListTableView.dataSource = self
             /// setting delegate of the table view
         self.searchHistoryTableView.delegate = self
-            
+        self.searchListTableView.delegate = self
             
             /// initializing search history cell type to show on table view
             let historyCellNib = UINib(nibName: SearchHistoryTableViewCell.cellReuseIdentifier, bundle: nil)
             self.searchHistoryTableView.register(historyCellNib, forCellReuseIdentifier: SearchHistoryTableViewCell.cellReuseIdentifier)
          
+        let resultCellNib = UINib(nibName: SearchResultTableViewCell.cellReuseIdentifier, bundle: nil)
+        self.searchListTableView.register(resultCellNib, forCellReuseIdentifier: SearchResultTableViewCell.cellReuseIdentifier)
+        
             /// Setting footer view of the table view so empty lines won't show
         self.searchHistoryTableView.tableFooterView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 0, height: 1.0))
+        self.searchListTableView.tableFooterView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 0, height: 1.0))
             
             /// Setting cell height to dynamic
         self.searchHistoryTableView.rowHeight = UITableView.automaticDimension
+        self.searchListTableView.rowHeight = UITableView.automaticDimension
             
             ///Estimation of the cell height
         self.searchHistoryTableView.estimatedRowHeight = 60
-        cnstHistoryTableViewHeight.constant = CGFloat((mockHistoryArray.count*60))
+        self.searchListTableView.estimatedRowHeight = 60
+        self.cnstHistoryTableViewHeight.constant = CGFloat((savedHistory.keywords.count*45))
             
         }
     
     
+    
+    func saveSearchHistory(text : String){
+       
+        savedHistory.add(text: text)
+        self.initTableView()
+       
+    }
+    func removeFromSearchHistory(index : Int){
+        savedHistory.removeAt(index: index)
+        self.initTableView()
+    }
+    
     func historyCellContent(index : Int)-> String {
-      ````
+
         return savedHistory.keywords[index]
     }
     
     func delayedSearch(text : String){
+        
+        saveSearchHistory(text: text)
+        WeatherAPICalls.keywordSearch(text) { response in
+        
+            guard let data = response else {
+                return
+            }
+            
+            self.searchResults = data
+            self.searchListTableView.reloadData()
+            
+        } failure: { Error in
+            do{}
+        }
+
       //TODO
     }
     @IBAction func backPressed(_ sender: Any) {
@@ -88,7 +114,9 @@ class SearchViewController : UIViewController {
     }
     @IBAction func searchPressed(_ sender: Any) {
         
-        let searchKeyword = txtSearchInput.text
+        if let searchKeyword = txtSearchInput.text {
+            delayedSearch(text: searchKeyword)
+        }
         
         
     }
@@ -102,9 +130,9 @@ extension SearchViewController : UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch tableView {
         case searchHistoryTableView:
-            return mockHistoryArray.count
+            return self.savedHistory.keywords.count
         case searchListTableView:
-           return 0
+            return self.searchResults.count
         default:
            return 0
         }
@@ -130,7 +158,13 @@ extension SearchViewController : UITableViewDataSource, UITableViewDelegate {
                 return UITableViewCell()
             }
         case searchListTableView:
-            return UITableViewCell()
+            if let cell:SearchResultTableViewCell = tableView.dequeueReusableCell(withIdentifier: SearchResultTableViewCell.cellReuseIdentifier) as? SearchResultTableViewCell {
+                
+                cell.setupCell(data: searchResults[indexPath.row])
+                return cell
+            }else {
+                return UITableViewCell()
+            }
         default:
             return UITableViewCell()
         }
@@ -143,7 +177,7 @@ extension SearchViewController : UITableViewDataSource, UITableViewDelegate {
 
 extension SearchViewController : SearchHistoryTableViewCellDelegate {
     func cellDeletePressed(index: Int) {
-     //TODO
+     removeFromSearchHistory(index: index)
     }
     
     

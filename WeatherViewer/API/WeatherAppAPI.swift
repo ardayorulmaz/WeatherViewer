@@ -33,7 +33,7 @@ class WeatherAppAPI: NSObject {
         
         
         /// merge url's from configure.plist and call path
-        let url = "BASEURL" + callPath
+        let url = ConfigurationDataHandler.shared.baseUrl() + callPath
         
         ///make the post requests with parameter and encoding
         session.request(url, method: .post, parameters: parameters, encoding : JSONEncoding.default).validate().responseDecodable{ (response:AFDataResponse<T>)  in
@@ -67,11 +67,12 @@ class WeatherAppAPI: NSObject {
         
         //Set up base url with call path
         
-        let url =  "BASEURL" + callPath
+        let url =  ConfigurationDataHandler.shared.baseUrl() + callPath
         
         
         session.request(url, method: .get, parameters: parameters, encoding : URLEncoding.default).validate().responseDecodable{ (response:AFDataResponse<T>)  in
             switch response.result {
+            
             case .success(let value):
                 success(value)
             case .failure(let error):

@@ -62,9 +62,17 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>APIKey</key>
-	<string>Xx2eAgoDh1Z0J7wpKNLZXZN44lnLV4mO</string>
-	<key>BaseURL</key>
-	<string>http://dataservice.accuweather.com/</string>
+	<key>NSExceptionDomains</key>
+	<dict>
+		<key>http://dataservice.accuweather.com/</key>
+		<dict>
+			<key>NSExceptionRequiresForwardSecrecy</key>
+			<true/>
+			<key>NSIncludesSubdomains</key>
+			<true/>
+			<key>NSExceptionAllowsInsecureHTTPLoads</key>
+			<true/>
+		</dict>
+	</dict>
 </dict>
 </plist>
