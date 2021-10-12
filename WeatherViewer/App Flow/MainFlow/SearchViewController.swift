@@ -26,7 +26,7 @@ class SearchViewController : UIViewController {
     var searchResults : AutoSearchResponse = []
     
     override func viewDidLoad() {
-        super.viewDidLoad()
+        super.viewDidLoad() 
         loadData()
        
     }
@@ -76,8 +76,9 @@ class SearchViewController : UIViewController {
     
     func saveSearchHistory(text : String){
        
-        savedHistory.add(text: text)
+        self.savedHistory.add(text: text)
         self.initTableView()
+        self.searchHistoryTableView.reloadData()
        
     }
     func removeFromSearchHistory(index : Int){
@@ -91,8 +92,8 @@ class SearchViewController : UIViewController {
     }
     
     func delayedSearch(text : String){
-        
-        saveSearchHistory(text: text)
+        //Alternative implementation to save keyword when an auto search is initiated.
+//        saveSearchHistory(text: text)
         WeatherAPICalls.keywordSearch(text) { response in
         
             guard let data = response else {
@@ -100,10 +101,24 @@ class SearchViewController : UIViewController {
             }
             
             self.searchResults = data
+            if(data.isEmpty){
+                self.searchListTableView.setMessage("Girdiğiniz kelime ile bir sonuç bulunamadı, lütfen başka bir kelime ile tekrar deneyiniz.")
+            }
             self.searchListTableView.reloadData()
             
-        } failure: { Error in
-            do{}
+        } failure: { failure in
+            if let error = failure {
+                switch error.code {
+                case "400":
+                    self.searchListTableView.setMessage("Hatalı arama parametreleri, arama yaptığınız kelimeyi kontrol edip tekrar deneyiniz")
+                case "401":
+                    self.searchListTableView.setMessage("API Anahtarı geçersiz, kontrol edip tekrar deneyiniz.")
+                case "404":
+                    self.searchListTableView.setMessage("Erişim hatası, daha sonra tekrar deneyiniz")
+                default:
+                    self.searchListTableView.setMessage("Beklenmedik bir hata oluştu.")
+                }
+            }
         }
 
       //TODO
@@ -167,6 +182,28 @@ extension SearchViewController : UITableViewDataSource, UITableViewDelegate {
             }
         default:
             return UITableViewCell()
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch tableView {
+        case searchListTableView:
+            
+            //Since auto search is implemented, preferred to choose selected cell`s data`s localized name as keyword to save.
+            //Keyword is saved when cell is selected.
+            self.saveSearchHistory(text: searchResults[indexPath.row].localizedName)
+            
+            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+            if let searchDetailVC = storyBoard.instantiateViewController(withIdentifier: "SearchDetailViewController") as? SearchDetailViewController{
+                searchDetailVC.modalPresentationStyle = .overFullScreen
+                searchDetailVC.searchData = searchResults[indexPath.row]
+                self.present(searchDetailVC , animated: true)
+            }
+        case searchHistoryTableView:
+            self.delayedSearch(text: savedHistory.keywords[indexPath.row])
+        default:
+            do{}
+            
         }
     }
     

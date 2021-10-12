@@ -7,7 +7,7 @@ target 'WeatherViewer' do
 
   # Pods for WeatherViewer
   pod 'Alamofire', '~> 5.4'
-
+  pod 'NotificationBannerSwift', '~> 3.0.0'
   target 'WeatherViewerTests' do
     inherit! :search_paths
     # Pods for testing

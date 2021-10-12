@@ -14,7 +14,7 @@ class WeatherAppAPI: NSObject {
         let instance = WeatherAppAPI()
         var sessionConfig = URLSessionConfiguration.default
         sessionConfig.timeoutIntervalForRequest = TimeInterval.init(100)
-        instance.session = Session(configuration: sessionConfig, interceptor: WeaetherAppInterceptor())
+        instance.session = Session(configuration: sessionConfig)
         return instance
     }()
     
@@ -76,8 +76,9 @@ class WeatherAppAPI: NSObject {
             case .success(let value):
                 success(value)
             case .failure(let error):
-                                
-                let generalError = ErrorResponse(code: String(response.response?.statusCode ?? 400), message: response.response?.description, reference: callPath)
+                            
+                debugPrint(response)
+                let generalError = ErrorResponse(code: String(response.response?.statusCode ?? 400), message: response.response?.debugDescription, reference: callPath)
                 
                 failure(generalError)
             }

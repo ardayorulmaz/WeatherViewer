@@ -9,7 +9,8 @@ import Foundation
 
 struct SearchResponseObject: Codable {
     var version: Int?
-    var key, type: String?
+    var key : String
+    var type: String?
     var rank: Int?
     var localizedName: String
     var country, administrativeArea: AdministrativeArea?

@@ -93,9 +93,9 @@ struct Elevation: Codable {
 
 // MARK: - Imperial
 struct Imperial: Codable {
-    var value: Int?
+    var value: Double?
     var unit: String?
-    var unitType: Int?
+    var unitType: Double?
 
     enum CodingKeys: String, CodingKey {
         case value = "Value"

@@ -248,16 +248,65 @@
             </objects>
             <point key="canvasLocation" x="-265" y="-645"/>
         </scene>
-        <!--View Controller-->
+        <!--Search Detail View Controller-->
         <scene sceneID="wxv-wz-KVJ">
             <objects>
-                <viewController id="dXi-xq-K5j" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SearchDetailViewController" id="dXi-xq-K5j" customClass="SearchDetailViewController" customModule="WeatherViewer" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Lzq-Tp-MxH">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eP9-aB-6MT">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cancel" translatesAutoresizingMaskIntoConstraints="NO" id="1EC-XE-IyZ">
+                                        <rect key="frame" x="25" y="70" width="35" height="35"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="35" id="1g4-gv-hgH"/>
+                                            <constraint firstAttribute="height" constant="35" id="7US-e9-jq9"/>
+                                        </constraints>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NZN-LP-N8N">
+                                        <rect key="frame" x="15" y="60" width="55" height="55"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="55" id="yLr-XX-TZn"/>
+                                            <constraint firstAttribute="width" constant="55" id="yZu-l3-Fzo"/>
+                                        </constraints>
+                                        <connections>
+                                            <action selector="closePressed:" destination="dXi-xq-K5j" eventType="touchUpInside" id="6hL-Vy-cvw"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="1EC-XE-IyZ" firstAttribute="centerX" secondItem="NZN-LP-N8N" secondAttribute="centerX" id="FbX-td-GQa"/>
+                                    <constraint firstItem="NZN-LP-N8N" firstAttribute="top" secondItem="eP9-aB-6MT" secondAttribute="top" constant="60" id="KCt-eh-O6K"/>
+                                    <constraint firstItem="1EC-XE-IyZ" firstAttribute="centerY" secondItem="NZN-LP-N8N" secondAttribute="centerY" id="YP9-Fq-CiS"/>
+                                    <constraint firstItem="NZN-LP-N8N" firstAttribute="leading" secondItem="eP9-aB-6MT" secondAttribute="leading" constant="15" id="YfB-5G-IbN"/>
+                                    <constraint firstAttribute="height" constant="100" id="zA6-rb-Qa5"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u5V-pQ-v7f" customClass="WeatherConditionView" customModule="WeatherViewer" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="100" width="414" height="762"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="ZZh-TS-0zH"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="eP9-aB-6MT" firstAttribute="top" secondItem="Lzq-Tp-MxH" secondAttribute="top" id="0H2-1W-czv"/>
+                            <constraint firstItem="ZZh-TS-0zH" firstAttribute="trailing" secondItem="eP9-aB-6MT" secondAttribute="trailing" id="4Uq-je-nhs"/>
+                            <constraint firstItem="u5V-pQ-v7f" firstAttribute="leading" secondItem="ZZh-TS-0zH" secondAttribute="leading" id="Buc-YU-r9Y"/>
+                            <constraint firstItem="eP9-aB-6MT" firstAttribute="leading" secondItem="ZZh-TS-0zH" secondAttribute="leading" id="DE6-Bc-qhs"/>
+                            <constraint firstItem="u5V-pQ-v7f" firstAttribute="top" secondItem="eP9-aB-6MT" secondAttribute="bottom" id="FTo-bz-Xtt"/>
+                            <constraint firstItem="ZZh-TS-0zH" firstAttribute="bottom" secondItem="u5V-pQ-v7f" secondAttribute="bottom" id="VK0-63-FNg"/>
+                            <constraint firstItem="ZZh-TS-0zH" firstAttribute="trailing" secondItem="u5V-pQ-v7f" secondAttribute="trailing" id="rdy-lH-BTp"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="btnClose" destination="NZN-LP-N8N" id="1iR-8c-Rbb"/>
+                        <outlet property="vwConditionView" destination="u5V-pQ-v7f" id="uVB-kO-zYv"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r8e-nu-1g7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -266,6 +315,7 @@
     </scenes>
     <resources>
         <image name="back" width="32" height="32"/>
+        <image name="cancel" width="32" height="32"/>
         <image name="search" width="91" height="91"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

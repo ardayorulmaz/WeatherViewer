@@ -8,8 +8,8 @@
 import Foundation
 
 // MARK: - CurrentConditionsResponeObject
-struct CurrentConditionsResponeObject: Codable {
-    var localObservationDateTime: Date?
+struct CurrentConditionsResponse: Codable {
+    var localObservationDateTime: String?
     var epochTime: Int?
     var weatherText: String?
     var weatherIcon: Int?
