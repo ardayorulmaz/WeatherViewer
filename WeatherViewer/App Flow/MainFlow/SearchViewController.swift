@@ -27,18 +27,24 @@ class SearchViewController : UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad() 
-        loadData()
+        self.loadData()
        
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        //This causes window to select text field since user has clicked textfield previous screen
+        self.txtSearchInput.becomeFirstResponder()
+    }
     //This functions loads data required for this page.
     func loadData(){
-        //Saving data to Userdefaults storage
+        //Loading data from Userdefaults storage
         let defaults = UserDefaults.standard
         let savedArray = defaults.object(forKey: "UserSearchHistory") as? [String] ?? [String]()
-        savedHistory = Keywords.init(array: savedArray)
+        self.savedHistory = Keywords.init(array: savedArray)
         //reconfiguring tableviews
-        initTableView()
+        self.initTableView()
+
     }
   
     //Setting up tableviews, assigning reusable TVC`s and various settings.
@@ -50,9 +56,9 @@ class SearchViewController : UIViewController {
         self.searchHistoryTableView.delegate = self
         self.searchListTableView.delegate = self
             
-            /// initializing search history cell type to show on table view
-            let historyCellNib = UINib(nibName: SearchHistoryTableViewCell.cellReuseIdentifier, bundle: nil)
-            self.searchHistoryTableView.register(historyCellNib, forCellReuseIdentifier: SearchHistoryTableViewCell.cellReuseIdentifier)
+        /// initializing search history cell type to show on table view
+        let historyCellNib = UINib(nibName: SearchHistoryTableViewCell.cellReuseIdentifier, bundle: nil)
+        self.searchHistoryTableView.register(historyCellNib, forCellReuseIdentifier: SearchHistoryTableViewCell.cellReuseIdentifier)
          
         let resultCellNib = UINib(nibName: SearchResultTableViewCell.cellReuseIdentifier, bundle: nil)
         self.searchListTableView.register(resultCellNib, forCellReuseIdentifier: SearchResultTableViewCell.cellReuseIdentifier)
@@ -73,7 +79,7 @@ class SearchViewController : UIViewController {
         }
     
     
-    
+    // Saving search keyword to UserDefaults, using keyword from latest clicked search result, may modify to use actual keyword that is used during search but since auto search function is active, this implementation was preferred.
     func saveSearchHistory(text : String){
        
         self.savedHistory.add(text: text)
@@ -81,6 +87,7 @@ class SearchViewController : UIViewController {
         self.searchHistoryTableView.reloadData()
        
     }
+    //Removing deleted keyword from search history
     func removeFromSearchHistory(index : Int){
         self.savedHistory.removeAt(index: index)
         
@@ -112,7 +119,7 @@ class SearchViewController : UIViewController {
             if let error = failure {
                 switch error.code {
                 case "400":
-                    self.searchListTableView.setMessage("Hatalı arama parametreleri, arama yaptığınız kelimeyi kontrol edip tekrar deneyiniz")
+                    self.searchListTableView.setMessage("Hatalı arama parametreleri, arama yaptığınız kelimeyi kontrol edip tekrar deneyiniz, noktalama işaretleri kullanmayınız")
                 case "401":
                     self.searchListTableView.setMessage("API Anahtarı geçersiz, kontrol edip tekrar deneyiniz.")
                 case "404":
@@ -123,19 +130,27 @@ class SearchViewController : UIViewController {
             }
         }
 
-      //TODO
+     
     }
     @IBAction func backPressed(_ sender: Any) {
         
         self.dismiss(animated: true, completion: nil)
     }
     @IBAction func searchPressed(_ sender: Any) {
+        //Disabling since using auto search with autocomplete does not require a button click
+//        if let searchKeyword = txtSearchInput.text {
+//            delayedSearch(text: searchKeyword)
+//        }
         
-        if let searchKeyword = txtSearchInput.text {
-            delayedSearch(text: searchKeyword)
-        }
         
-        
+    }
+    //Function to clear whole search history
+    @objc func clearHistoryClicked(sender:UIButton)
+    {
+       
+        self.savedHistory.clear()
+        self.initTableView()
+        self.searchHistoryTableView.reloadData()
     }
 }
 
@@ -143,6 +158,45 @@ class SearchViewController : UIViewController {
 extension SearchViewController : UITableViewDataSource, UITableViewDelegate {
     
     
+ 
+        // Setting section header height of setting page's table's sections.
+        func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+            if(tableView == self.searchHistoryTableView){
+                return 50
+            }
+            else {
+                return 0
+            }
+        }
+        
+        // Setting up a button to delete whole search history
+        func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+            if(tableView == self.searchHistoryTableView){
+            let headerView = UIView.init(frame: CGRect.init(x:0, y: 0, width: UIScreen.main.bounds.size.width, height: 50))
+            headerView.backgroundColor = UIColor.white
+            headerView.clipsToBounds = true
+            
+            let label = UILabel()
+            
+            label.frame = CGRect.init(x: UIScreen.main.bounds.maxX-115, y: 15, width: 100, height: headerView.frame.height)
+            label.textAlignment = .right
+            label.text = "Temizle"
+            label.font = UIFont.systemFont(ofSize: 15, weight: .semibold )
+            label.textColor = .black
+                
+            headerView.addSubview(label)
+                
+            //Settong up button for clear historyAction
+            let button = UIButton()
+            button.frame = label.frame
+            button.addTarget(target, action: #selector(clearHistoryClicked(sender:)), for: .touchUpInside);
+            headerView.addSubview(button)
+            
+            
+            return headerView
+            }
+            return UIView()
+        }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch tableView {

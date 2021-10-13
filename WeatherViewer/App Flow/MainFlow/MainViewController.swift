@@ -24,7 +24,8 @@ class MainViewController : UIViewController {
     func loadData(){
         
         if let latLong = LocationTrackingHelper.sharedHelper.latestLocation {
-            var latLongString = String(latLong.coordinate.latitude) + "," + String(latLong.coordinate.longitude)
+            //formatting lat,long string for API call
+            let latLongString = String(latLong.coordinate.latitude) + "," + String(latLong.coordinate.longitude)
             WeatherAPICalls.geolocationSearch(latLongString) { success in
                 guard let data = success else {
                     return
@@ -40,6 +41,8 @@ class MainViewController : UIViewController {
                     }
                     self.vwWeatherConditionView.setupView(data: conditionData, locationData: data)
                 } failure: { failure in
+                    
+                    //Error handling for most common errors to show a banner with error reason.
                     if let error = failure {
                         switch error.code {
                         case "400":
@@ -74,12 +77,13 @@ class MainViewController : UIViewController {
     // Touch action of search field. Opens search view
     @IBAction func SearchFieldPressed(_ sender: Any) {
   
-        openSearchView()
+        self.openSearchView()
     }
     
     // Touch action of search button Opens search view
     @IBAction func SearchPressed(_ sender: Any) {
-        openSearchView()
+        //Disabling to use search bar click action
+       // openSearchView()
     }
     
     
@@ -91,7 +95,7 @@ class MainViewController : UIViewController {
         }
     }
     
-    
+    //Adding observer for location updates to get latest location`s temperature status.
     func listenLocationChanges(){
         NotificationCenter.default.addObserver(forName: LocationTrackingHelper.locationChangedNotification, object: nil, queue: .main) { (notification) in
                 

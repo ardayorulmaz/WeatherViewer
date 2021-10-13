@@ -28,7 +28,7 @@ class LocationTrackingHelper: NSObject, CLLocationManagerDelegate {
         return instance
     }()
     
-    
+    //Configure function for location helper, it fires up at start and when entering foreground.
     func configure(){
             switch CLLocationManager.authorizationStatus() {
             case .notDetermined:
@@ -117,7 +117,7 @@ class LocationTrackingHelper: NSObject, CLLocationManagerDelegate {
         }
     }
     
-    
+    //Observer for location changes, when location changes a notification fires up to update location.
     func locationManager(_ manager: CLLocationManager,
                          didUpdateLocations locations: [CLLocation]) {
         

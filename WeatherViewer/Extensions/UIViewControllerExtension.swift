@@ -2,13 +2,13 @@
 //  UIViewControllerExtension.swift
 //  WeatherViewer
 //
-//  Created by 23 Studios on 13.10.2021.
+//  Created by Arda Yorulmaz on 13.10.2021.
 //
 
 import Foundation
 import UIKit
 import NotificationBannerSwift
-
+//Simple UIVC extension for showing informational banners using NotificationBannerSwift
 extension UIViewController {
     
     func showBanner(text : String, type : NotificationBannerSwift.BannerStyle){
